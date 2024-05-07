@@ -53,8 +53,8 @@ kubectl port-forward svc/argocd-server 8080:443 -n argocd
 We are basically try to access the argocd-server from our localhost:8080
 
 - The ui will prompt for user name and password
-username: admin
-password: 
+** username: admin **
+  
 
 To get the password run the following command:
 ```
