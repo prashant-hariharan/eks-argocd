@@ -57,8 +57,9 @@ username: admin
 password: 
 
 To get the password run the following command:
+```
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
-
+```
 
 ## Step-04: Applciation verification
 Argo cd would have synced and deployed the docker image to kuberentes.
