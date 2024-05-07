@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: eks-demo-argo-application
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/prashant-hariharan/eks-argocd.git
+    targetRevision: HEAD
+    path: dev
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: myapp
+
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      # The automated sync will create a new revision of the application when changes are detected.
+      # If we apply changes to cluster manually using kubectl, argocd will override it with self heal
+      selfHeal: true
+      prune: true
