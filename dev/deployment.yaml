@@ -61,9 +61,4 @@ spec:
               cpu: 200m
               memory: 400Mi
       restartPolicy: Always
----
-spec:
-  template:
-    spec:
-      containers:
-        - image: prashantdocker87/eks-demo:4eea0ab
+
