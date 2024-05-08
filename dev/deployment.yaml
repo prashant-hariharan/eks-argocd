@@ -28,7 +28,7 @@ spec:
                       - expense-service-api
               topologyKey: nodes
       containers:
-        - image: prashantdocker87/eks-demo:4eea0ab
+        - image: prashantdocker87/eks-demo:1.0
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 3
