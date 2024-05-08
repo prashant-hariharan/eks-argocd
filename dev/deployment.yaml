@@ -20,49 +20,50 @@ spec:
       affinity:
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
-          - labelSelector:
-              matchExpressions:
-              - key: app
-                operator: In
-                values:
-                - expense-service-api
-            topologyKey: nodes
+            - labelSelector:
+                matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - expense-service-api
+              topologyKey: nodes
       containers:
-      - image:  prashantdocker87/eks-demo:2.0
-        imagePullPolicy: Always
-        livenessProbe:
-          failureThreshold: 3
-          httpGet:
-            path: /actuator/health
-            port: service-port
-            scheme: HTTP
-          initialDelaySeconds: 45
-          periodSeconds: 10
-          successThreshold: 1
-          timeoutSeconds: 1
-        name: expense-service-api
-        ports:
-        - containerPort: 8080
-          name: service-port
-          protocol: TCP
-        readinessProbe:
-          failureThreshold: 3
-          initialDelaySeconds: 45
-          periodSeconds: 10
-          successThreshold: 1
-          tcpSocket:
-            port: service-port
-          timeoutSeconds: 1
-        resources:
-          limits:
-            cpu: 500m
-            memory: 750Mi
-          requests:
-            cpu: 200m
-            memory: 400Mi
-
+        - image: prashantdocker87/eks-demo:4eea0ab
+          imagePullPolicy: Always
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /actuator/health
+              port: service-port
+              scheme: HTTP
+            initialDelaySeconds: 45
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          name: expense-service-api
+          ports:
+            - containerPort: 8080
+              name: service-port
+              protocol: TCP
+          readinessProbe:
+            failureThreshold: 3
+            initialDelaySeconds: 45
+            periodSeconds: 10
+            successThreshold: 1
+            tcpSocket:
+              port: service-port
+            timeoutSeconds: 1
+          resources:
+            limits:
+              cpu: 500m
+              memory: 750Mi
+            requests:
+              cpu: 200m
+              memory: 400Mi
       restartPolicy: Always
 ---
-
-
-
+spec:
+  template:
+    spec:
+      containers:
+        - image: prashantdocker87/eks-demo:4eea0ab
